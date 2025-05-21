@@ -1,17 +1,24 @@
+"use client";
+
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SearchResults } from "@/components/search/search-results";
+import { use } from "react";
 
-interface SearchPageProps {
-  searchParams: {
-    q?: string;
-    page?: string;
-  };
+interface SearchParamsType {
+  q?: string;
+  page?: string;
 }
 
-export default function SearchPage({ searchParams }: SearchPageProps) {
-  const query = searchParams.q || "";
-  const page = parseInt(searchParams.page || "1");
+interface PageProps {
+  searchParams: Promise<SearchParamsType>;
+}
+
+export default function SearchPage({ searchParams }: PageProps) {
+  const resolvedSearchParams = use(searchParams);
+  
+  const query = resolvedSearchParams.q || "";
+  const page = parseInt(resolvedSearchParams.page || "1");
 
   return (
     <div className="min-h-screen bg-white">
@@ -34,15 +41,4 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
       <Footer />
     </div>
   );
-}
-
-export function generateMetadata({ searchParams }: SearchPageProps) {
-  const query = searchParams.q || "";
-  
-  return {
-    title: query ? `Search: ${query} - Daily News` : "Search - Daily News",
-    description: query 
-      ? `Search results for "${query}" on Daily News` 
-      : "Search for news articles on Daily News",
-  };
 }
