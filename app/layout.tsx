@@ -28,6 +28,9 @@ export default function RootLayout({
     <ConvexClientProvider>
       <html lang="en">
         <head>
+      <link rel="icon" href="/img/f.png" sizes="any" />
+        </head>
+        {/* <head>
           <link
             rel="icon"
             type="image/png"
@@ -42,7 +45,7 @@ export default function RootLayout({
             href="/apple-touch-icon.png"
           />
           <link rel="manifest" href="/site.webmanifest" />
-        </head>
+        </head> */}
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
